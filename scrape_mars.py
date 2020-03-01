@@ -2,10 +2,13 @@ from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 import requests
 import pandas as pd
+from datetime import datetime
 
 def scrape():
     """Scrape various data from Mars-related websites. Returns a dictionary of the scraped data."""
     
+    date = datetime.today().isoformat()
+
     # set up Selenium driver
     print("Setting up Selenium driver...")
     driver = webdriver.Firefox()
@@ -104,6 +107,8 @@ def scrape():
 
     return {
 
+        'request_date': date
+        
         'news': {
             'date': news_date,
             'title': news_title,
