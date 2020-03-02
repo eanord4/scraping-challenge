@@ -7,7 +7,7 @@ from datetime import datetime
 def scrape():
     """Scrape various data from Mars-related websites. Returns a dictionary of the scraped data."""
     
-    date = datetime.today().isoformat()
+    timestamp = str(datetime.today()).split('.')[0]
 
     # set up Selenium driver
     print("Setting up Selenium driver...")
@@ -92,22 +92,26 @@ def scrape():
 
     # parse html on main page
     print("Parsing main page for Mars Hemispheres...")
-    imgs = {}  # initially the urls of the images pages, then replaced with actual image urls
+    imgs = []  # initially the urls of the images pages, then replaced with actual image urls
     for a in driver.find_elements_by_tag_name('a'):
         if a.get_attribute('class') == "itemLink product-item" and a.find_elements_by_tag_name('h3'):
-            imgs[a.text] = a.get_attribute('href')
+            imgs.append([a.text, a.get_attribute('href')])
             
     # parse html on each image page
     print("Parsing image pages for Mars Hemispheres...")
-    for key, value in imgs.items():
-        driver.get(value)
-        img = driver.find_element_by_tag_name('img')
-        imgs[key] = img.get_attribute('src')
+    for i, (_, url) in enumerate(imgs):
+
+        driver.get(url)
+
+        for img in driver.find_elements_by_tag_name('img'):
+            if img.get_attribute('class') == "wide-image":
+                imgs[i][1] = img.get_attribute('src')
+                break
     
 
     return {
 
-        'request_date': date
+        'request_timestamp': timestamp,
         
         'news': {
             'date': news_date,

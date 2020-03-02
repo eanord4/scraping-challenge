@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>12 - Web Scraping with MongoDB</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <center>
+        <div class="container-fluid bg-danger">
+            <h1 class="display-1">Eric's Mars Page</h1>
+            <p><i>Last scraped:</i> {{request_timestamp}}</p>
+            <button class="btn btn-warning mb-3">~ Scrape the Latest Mars Data ~</button>
+        </div>
+    </center>
+    <div class="container-fluid bg-dark pt-5">
+        <div class="row">
+            <div class="col-4">
+                <div class="jumbotron pb-2 pt-4 bg-dark text-light" style="border-style:solid; border-color:brown;">
+                    <h6>Current Weather on Mars</h6>
+                    <p>{{weather_tweet_text}}</p>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <h1 class="display-5">Mars News</h1>
+                        <h5><i>{{news_title}}</i></h5>
+                    </div>
+                    <div class="card-body bg-dark text-light">
+                        <p>{{news_date}}</p>
+                        <p>{{news_paragraph}}</p>
+                    </div>
+                    <div class="card-footer bg-info">
+                        <a class="text-dark" href={{news_more}}>
+                            Click here for more info!
+                        </a>
+                    </div>
+                </div>
+                <div class="card mt-5">
+                    <div class="card-header bg-info">
+                        <h1 class="display-5">Did you know?</h1>
+                        <h5><i>Earth vs. Mars</i></h5>
+                    </div>
+                    <div class="card-body bg-dark text-light">
+                        {{facts_earth_comparison | safe}}
+                    </div>
+                </div>
+                <div class="card mt-5">
+                    <div class="card-header bg-info">
+                        <h1 class="display-5">NASA Featured Image</h1>
+                        <a href="https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars">
+                            <h5 class="text-dark"><i>{{featured_image_title}}</i></h5>
+                        </a>
+                    </div>
+                    <div class="card-body bg-dark">
+                        <img class="img-fluid" src={{featured_image_url}}>
+                    </div>
+                    <div class="card-footer bg-info">
+                        {{featured_image_description}}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <center>
+                    <h1 class="display-3 text-light">Mars Hemispheres</h1>
+                    <i class="text-light">
+                        Source: <a href="https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars">
+                            astrogeology.usgs.gov
+                        </a>
+                    </i>
+                </center>
+                <div class="card-deck mt-4">
+                    <div class="card bg-danger text-center mx-3">
+                        <div class="card-header" style="background-color:rgba(255, 115, 0, 0.829);">
+                            <h5>{{hemisphere_img_urls[0][0]}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <img class="img-fluid" src={{hemisphere_img_urls[0][1]}}>
+                        </div>
+                    </div>
+                    <div class="card bg-danger text-center mx-3">
+                        <div class="card-header" style="background-color:rgba(255, 115, 0, 0.829);">
+                            <h5>{{hemisphere_img_urls[1][0]}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <img class="img-fluid" src={{hemisphere_img_urls[1][1]}}>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-3"></div>
+                <div class="card-deck">
+                    <div class="card bg-danger text-center mx-3">
+                        <div class="card-header" style="background-color:rgba(255, 115, 0, 0.829);">
+                            <h5>{{hemisphere_img_urls[2][0]}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <img class="img-fluid" src={{hemisphere_img_urls[2][1]}}>
+                        </div>
+                    </div>
+                    <div class="card bg-danger text-center mx-3">
+                        <div class="card-header" style="background-color:rgba(255, 115, 0, 0.829);">
+                            <h5>{{hemisphere_img_urls[3][0]}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <img class="img-fluid" src={{hemisphere_img_urls[3][1]}}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
